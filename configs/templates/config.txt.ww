@@ -1,0 +1,23 @@
+{{- nobackup }}
+{{- range $node := .AllNodes -}}
+{{- file (print .Tags.Serial "/config.txt") }}
+{{- $firmware := printf "/%s/%s" .ImageName ( default "efi" .Tags.Firmware ) }}
+## Boot configuration
+usb_max_current_enable=1
+auto_initramfs=1
+arm_64bit=1
+arm_boost=1
+
+## Serial Debug
+start_debug=1
+uart_2ndstage=1
+dtoverlay=disable-bt
+enable_uart=1
+
+## Node Configuration - {{ .Id }}
+start_file={{ $firmware }}/start4db.elf
+fixup_file={{ $firmware }}/fixup4db.dat
+os_prefix={{ $firmware }}/
+kernel={{ $firmware }}/kernel8.img
+initramfs {{ $firmware }}/initramfs8
+{{ end -}}

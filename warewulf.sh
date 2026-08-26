@@ -43,8 +43,13 @@ go clean -modcache
 echo 'export PATH=$PATH:/opt/warewulf/bin' > /etc/profile.d/warewulf.sh
 
 ### add raspi's special uefi pxeboot: ####################################
-curl -o rpi-uefi.zip -L https://github.com/pftf/RPi4/releases/download/v1.38/RPi4_UEFI_Firmware_v1.38.zip
-unzip rpi-uefi.zip -d /var/lib/tftpboot/
+# curl -o rpi-uefi.zip -L https://github.com/pftf/RPi4/releases/download/v1.38/RPi4_UEFI_Firmware_v1.38.zip
+# unzip rpi-uefi.zip -d /var/lib/tftpboot/
+
+### add raspi netboot files: #############################################
+for f in cmdlne.txt.ww config.txt.ww images.ww ; do
+	wwctl overlay import --overwrite host $f /var/lib/tftpboot
+done
 
 ### return to previous location: #########################################
 cd -
