@@ -23,7 +23,7 @@ BASEDIR=$( dirname $0 )
 rootfs-expand
 
 ### install services required for warewulf: ##############################
-dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang unzip ipxe-bootimgs-aarch64
+dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang unzip
 
 ### disable firewalld: ###################################################
 systemctl disable --now firewalld
@@ -32,15 +32,12 @@ systemctl disable --now firewalld
 mkdir /opt/warewulf
 git clone https://github.com/warewulf/warewulf.git /opt/warewulf/src
 cd /opt/warewulf/src
-git checkout v4.5.8
+git checkout v4.6.0
 git apply $BASEDIR/configs/ww-picluster.patch
 make clean defaults PREFIX=/opt/warewulf
 make all
 make install
 go clean -modcache
-
-### point warewulf to ipxe images: #######################################
-sed -i 's/\/opt\/warewulf\/share\/ipxe/\/usr\/share\/ipxe/' /opt/warewulf/etc/warewulf/warewulf.conf
 
 ### add warewulf to path: ################################################
 echo 'export PATH=$PATH:/opt/warewulf/bin' > /etc/profile.d/warewulf.sh
