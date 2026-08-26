@@ -40,10 +40,10 @@ index 3b76ae4f..9142db15 100644
  					softlinkFromTemplate := regLink.FindAllStringSubmatch(line, -1)
  					if len(softlinkFromTemplate) != 0 {
  						wwlog.Debug("Creating soft link %s -> %s", outputPath, softlinkFromTemplate[0][1])
-+						if _, err := os.Lstat(filePath); err == nil {
-+							wwlog.Debug("Link %s already exists, will try to remove", filePath)
-+							if err := os.Remove(filePath); err != nil {
-+								return fmt.Errorf("failed to remove existing link at %s: %w", filePath, err)
++						if _, err := os.Lstat(outputPath); err == nil {
++							wwlog.Debug("Link %s already exists, will try to remove", outputPath)
++							if err := os.Remove(outputPath); err != nil {
++								return fmt.Errorf("failed to remove existing link at %s: %w", outputPath, err)
 +							}
 +						}
  						return os.Symlink(softlinkFromTemplate[0][1], outputPath)
