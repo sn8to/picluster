@@ -41,6 +41,7 @@ go clean -modcache
 
 ### add warewulf to path: ################################################
 echo 'export PATH=$PATH:/opt/warewulf/bin' > /etc/profile.d/warewulf.sh
+sed -i 's/secure_path="/secure_path="\/opt\/warewulf\/bin:/' /etc/sudoers
 
 ### add raspi's special uefi pxeboot: ####################################
 # curl -o rpi-uefi.zip -L https://github.com/pftf/RPi4/releases/download/v1.38/RPi4_UEFI_Firmware_v1.38.zip
