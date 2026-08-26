@@ -49,7 +49,7 @@ sed -i 's/secure_path="/secure_path="\/opt\/warewulf\/bin:/' /etc/sudoers
 
 ### add raspi netboot files: #############################################
 for f in cmdlne.txt.ww config.txt.ww images.ww ; do
-	wwctl overlay import --overwrite host $f /var/lib/tftpboot
+	wwctl overlay import host $BASEDIR/configs/templates/$f /var/lib/tftpboot
 done
 
 ### return to previous location: #########################################
