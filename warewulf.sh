@@ -35,7 +35,7 @@ cd /opt/warewulf/src
 git checkout v4.6.0
 git apply $BASEDIR/configs/ww-picluster.patch
 make clean config PREFIX=/opt/warewulf
-make all
+make all PREFIX=/opt/warewulf
 make install
 go clean -modcache
 
