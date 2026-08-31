@@ -1,5 +1,5 @@
 diff --git a/etc/warewulf.conf b/etc/warewulf.conf
-index ab06c8b0..442faf18 100644
+index ab06c8b0..5a913e5c 100644
 --- a/etc/warewulf.conf
 +++ b/etc/warewulf.conf
 @@ -1,5 +1,5 @@
@@ -10,17 +10,24 @@ index ab06c8b0..442faf18 100644
  warewulf:
    secure: false
    update interval: 60
-@@ -7,8 +7,8 @@ warewulf:
+@@ -7,13 +7,13 @@ warewulf:
    host overlay: true
  dhcp:
    enabled: true
 -  range start: 10.0.1.1
 -  range end: 10.0.1.255
+-  systemd name: dhcpd
 +  range start: 10.0.0.200
 +  range end: 10.0.0.255
-   systemd name: dhcpd
++  systemd name: dnsmasq
    template: default
  tftp:
+   enabled: true
+-  systemd name: tftp
++  systemd name: dnsmasq
+   ipxe:
+     00:09: ipxe-snponly-x86_64.efi
+     00:00: undionly.kpxe
 @@ -24,8 +24,8 @@ nfs:
    export paths:
    - path: /home

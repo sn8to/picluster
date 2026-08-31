@@ -23,7 +23,7 @@ BASEDIR=$( dirname $0 )
 rootfs-expand
 
 ### install services required for warewulf: ##############################
-dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang unzip ipxe-bootimgs-aarch64
+dnf -y --setopt=install_weak_deps=False --nodocs install dnsmasq nfs-utils golang unzip ipxe-bootimgs-aarch64
 
 ### disable firewalld: ###################################################
 systemctl disable --now firewalld
@@ -58,7 +58,7 @@ done
 ### return to previous location: #########################################
 cd -
 
-systemctl enable dhcpd tftp warewulfd
+systemctl enable dnsmasq warewulfd
 
 ### reboot ###############################################################
 reboot
