@@ -1,5 +1,6 @@
 {{- nobackup }}
 {{- range $node := .AllNodes }}
+{{- if .Tags.Serial }}
 {{- $netdev := .NetDevs.default }}
 {{- $baseuri := "" }}
 {{- if $.Ipaddr6 }}
@@ -10,3 +11,4 @@
 {{- file (print .Tags.Serial "/cmdline.txt") -}}
 rd.shell rd.neednet=1 root=wwinit:{{default "tmpfs" .Root}} wwinit.uri={{ $baseuri }} init=/warewulf/run-init wwid={{$netdev.Hwaddr}} {{ .Kernel.Args | join " " }}
 {{ end -}}
+{{- end }}

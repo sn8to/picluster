@@ -1,5 +1,6 @@
 {{- nobackup }}
 {{- range $node := .AllNodes -}}
+{{- if .Tags.Serial }}
 {{- file (print .Tags.Serial "/config.txt") }}
 {{- $firmware := printf "/%s/%s" .ImageName ( default "efi" .Tags.Firmware ) }}
 ## Boot configuration
@@ -15,3 +16,4 @@ os_prefix={{ $firmware }}/
 kernel={{ $firmware }}/kernel8.img
 initramfs {{ $firmware }}/initramfs8
 {{ end -}}
+{{- end}}

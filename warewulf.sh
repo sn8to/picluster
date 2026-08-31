@@ -51,7 +51,7 @@ sed -i 's/secure_path="/secure_path="\/opt\/warewulf\/bin:/' /etc/sudoers
 # unzip rpi-uefi.zip -d /var/lib/tftpboot/
 
 ### add raspi netboot files: #############################################
-for f in cmdlne.txt.ww config.txt.ww images.ww ; do
+for f in cmdline.txt.ww config.txt.ww images.ww ; do
 	wwctl overlay import host $BASEDIR/configs/templates/$f /var/lib/tftpboot
 done
 
