@@ -34,7 +34,7 @@ git clone https://github.com/warewulf/warewulf.git /opt/warewulf/src
 cd /opt/warewulf/src
 git checkout v4.6.0
 git apply $BASEDIR/configs/ww-picluster.patch
-make clean config PREFIX=/opt/warewulf
+make clean defaults config PREFIX=/opt/warewulf
 make all PREFIX=/opt/warewulf
 make install
 go clean -modcache
@@ -54,6 +54,10 @@ sed -i 's/secure_path="/secure_path="\/opt\/warewulf\/bin:/' /etc/sudoers
 for f in cmdline.txt.ww config.txt.ww images.ww ; do
 	wwctl overlay import host $BASEDIR/configs/templates/$f /var/lib/tftpboot
 done
+
+### bind dnsmasq to ethernet: ############################################
+echo 'interface=eth0' > /etc/dnsmasq.d/eth0.conf
+echo 'pxe-service=0,"Raspberry Pi Boot"' > /etc/dnsmasq.d/piboot.conf
 
 ### return to previous location: #########################################
 cd -
