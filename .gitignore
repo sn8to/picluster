@@ -11,3 +11,4 @@ picluster-bullseye-best.img.zst
 .markdownlint.json
 pi5*
 *.xz
+!pi5-notes.md
