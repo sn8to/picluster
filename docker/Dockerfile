@@ -5,6 +5,7 @@ RUN wget https://download.rockylinux.org/pub/sig/9/altarch/aarch64/altarch-commo
 RUN dnf update -y
 RUN dnf install -y --setopt=install_weak_deps=False rocky-release-rpi kernel-rpi-4k-core kernel-rpi-16k-core kernel-rpi-firmware rpi-firmware-bluez rpi-firmware-nonfree
 RUN dnf install -y "https://github.com/warewulf/warewulf/releases/download/v4.6.0/warewulf-dracut-4.6.0-1.el9.noarch.rpm"
+RUN sed -i -e 's/-o mpol=interleave //' /usr/lib/dracut/modules.d/90wwinit/load-wwinit.sh
 RUN dracut --verbose --force --no-hostonly --add wwinit --regenerate-all
 RUN dnf install -y --downloadonly --downloaddir=/apps/pkgs/chrony chrony; echo
 RUN dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-compute slurm-slurmd munge; echo
