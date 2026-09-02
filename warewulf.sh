@@ -56,7 +56,7 @@ for f in cmdline.txt.ww config.txt.ww images.ww ; do
 done
 
 ### bind dnsmasq to ethernet: ############################################
-echo 'interface=eth0' > /etc/dnsmasq.d/eth0.conf
+wwctl overlay import host $BASEDIR/configs/templates/ww4-listen.conf.ww /etc/dnsmasq.d
 echo 'pxe-service=0,"Raspberry Pi Boot"' > /etc/dnsmasq.d/piboot.conf
 
 ### return to previous location: #########################################
